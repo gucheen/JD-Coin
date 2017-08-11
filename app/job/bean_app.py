@@ -12,9 +12,11 @@ class BeanApp(Daka):
 
     index_url = 'https://bean.m.jd.com'
     info_url = 'https://api.m.jd.com/client.action?functionId=queryBeanIndex'
-    sign_url = 'https://ld.m.jd.com/SignAndGetBeansN/signStart.action'
+    #sign_url = 'https://ld.m.jd.com/SignAndGetBeansN/signStart.action'
+    sign_url = 'https://api.m.jd.com/client.action?functionId=signBeanStart&body=%7B%7D&client=ld&clientVersion=1.0.0'
     test_url = 'https://home.m.jd.com'
-    poker_url = 'https://ld.m.jd.com/card/getCardResult.action'
+    #poker_url = 'https://ld.m.jd.com/card/getCardResult.action'
+    poker_url = 'https://api.m.jd.com/client.action?functionId=getCardResult&body=%7B%22index%22%3A1%7D&client=ld&clientVersion=1.0.0'
 
     def is_signed(self):
         payload = {
@@ -47,6 +49,7 @@ class BeanApp(Daka):
         sign_success = False
 
         if r.ok:
+            self.logger.info(r.text);
             as_json = r.json()
             sign_success = (as_json['status'] == 1)
             message = as_json['signText']
