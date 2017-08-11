@@ -49,7 +49,6 @@ class BeanApp(Daka):
         sign_success = False
 
         if r.ok:
-            self.logger.info(r.text);
             as_json = r.json()
             sign_success = (as_json['status'] == 1)
             message = as_json['signText']
